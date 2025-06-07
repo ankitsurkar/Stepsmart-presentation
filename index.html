@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access Required - StepSmart Presentation</title>
+    <!-- Tailwind CSS CDN for quick styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: white;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 1.5rem; /* More rounded corners */
+            padding: 2.5rem; /* Increased padding */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 90%;
+            max-width: 450px; /* Slightly wider */
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            animation: fadeIn 0.8s ease-out;
+        }
+        .input-field {
+            width: 100%;
+            padding: 0.75rem; /* Increased padding */
+            margin-bottom: 1.5rem; /* More space below */
+            border-radius: 0.5rem; /* Rounded input fields */
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+        .input-field::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .input-field:focus {
+            border-color: #ffd700; /* Gold focus border */
+        }
+        .submit-button {
+            width: 100%;
+            padding: 0.85rem; /* Adjusted padding */
+            background: #ffd700; /* Gold button */
+            border: none;
+            border-radius: 0.75rem; /* Rounded button */
+            color: #4B0082; /* Dark purple text for contrast */
+            font-size: 1.1rem; /* Slightly larger text */
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+        .submit-button:hover {
+            background: #e0b800; /* Darker gold on hover */
+            transform: translateY(-2px);
+        }
+        .message {
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            color: #FF6B6B; /* Red for error messages */
+            font-weight: 500;
+        }
+        h1 {
+            font-size: 2.25rem; /* Larger heading */
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        p {
+            font-size: 1.1rem; /* Larger paragraph */
+            margin-bottom: 1.75rem; /* More space below paragraph */
+            color: rgba(255, 255, 255, 0.9);
+        }
+        /* Fade in animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Secure Access</h1>
+        <p>Please enter the password to view the investor presentation.</p>
+        <input type="password" id="passwordInput" class="input-field" placeholder="Enter password">
+        <button onclick="checkPassword()" class="submit-button">Access Presentation</button>
+        <div id="message" class="message"></div>
+    </div>
+
+    <script>
+        // IMPORTANT: Change this to your desired password
+        const CORRECT_PASSWORD = "YourSecurePassword123"; // REPLACE THIS WITH A STRONG, UNIQUE PASSWORD!
+
+        /**
+         * Checks the entered password and redirects if correct.
+         * Displays an error message if the password is incorrect.
+         */
+        function checkPassword() {
+            const enteredPassword = document.getElementById('passwordInput').value;
+            const messageElement = document.getElementById('message');
+
+            if (enteredPassword === CORRECT_PASSWORD) {
+                messageElement.textContent = 'Access granted! Redirecting...';
+                messageElement.style.color = '#38a169'; // Green for success
+                // Redirect to your main presentation file
+                // IMPORTANT: Replace 'stepsmart_pitch.html' with the actual filename of your presentation
+                window.location.href = 'stepsmart_pitch.html'; 
+            } else {
+                messageElement.textContent = 'Incorrect password. Please try again.';
+                messageElement.style.color = '#FF6B6B'; // Red for error
+            }
+        }
+
+        // Allow pressing Enter key to submit the password
+        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+    </script>
+</body>
+</html>
