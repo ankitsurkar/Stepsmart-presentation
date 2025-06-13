@@ -3,135 +3,262 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StepSmart - Pitch Deck</title>
+    <title>StepSmart - Bridging Education to Employment</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            color: #333;
             overflow-x: hidden;
         }
-
-        .slide-container {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
+        
+        .presentation-container {
             display: flex;
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            flex-direction: column;
+            min-height: 100vh;
         }
-
+        
         .slide {
-            min-width: 100vw;
-            height: 100vh;
-            display: flex;
+            min-height: 100vh;
+            display: none;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 60px;
+            padding: 60px 40px;
+            text-align: center;
             position: relative;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.9), rgba(118, 75, 162, 0.9));
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
+            margin: 20px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
         }
-
-        .slide:nth-child(even) {
-            background: linear-gradient(135deg, rgba(118, 75, 162, 0.9), rgba(102, 126, 234, 0.9));
+        
+        .slide.active {
+            display: flex;
         }
-
+        
         .slide h1 {
-            font-size: 4rem;
-            margin-bottom: 2rem;
-            text-align: center;
+            font-size: 3.5em;
             font-weight: 700;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            animation: fadeInUp 1s ease-out;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-
+        
         .slide h2 {
-            font-size: 3rem;
-            margin-bottom: 2rem;
-            text-align: center;
+            font-size: 2.5em;
             font-weight: 600;
-            color: #fff;
-            animation: fadeInUp 1s ease-out 0.2s both;
+            margin-bottom: 25px;
+            color: #4a5568;
         }
-
+        
         .slide h3 {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            color: #f0f0f0;
-            animation: fadeInUp 1s ease-out 0.4s both;
+            font-size: 1.8em;
+            font-weight: 500;
+            margin-bottom: 20px;
+            color: #667eea;
         }
-
-        .slide p, .slide li {
-            font-size: 1.3rem;
+        
+        .slide p {
+            font-size: 1.3em;
             line-height: 1.6;
-            margin-bottom: 1rem;
-            text-align: center;
-            animation: fadeInUp 1s ease-out 0.6s both;
+            margin-bottom: 20px;
+            max-width: 900px;
+            color: #555;
         }
-
-        .subtitle {
-            font-size: 1.8rem;
-            color: #e0e0e0;
-            margin-bottom: 3rem;
-            animation: fadeInUp 1s ease-out 0.4s both;
+        
+        .highlight {
+            color: #667eea;
+            font-weight: 600;
         }
-
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+            width: 100%;
+            max-width: 1000px;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .stat-number {
+            font-size: 3em;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            max-width: 1000px;
-            margin-top: 2rem;
-        }
-
-        .feature-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2rem;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            animation: slideInUp 0.8s ease-out;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-        }
-
-        .feature-card h4 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #fff;
-        }
-
-        .stats-container {
-            display: flex;
-            justify-content: space-around;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
             width: 100%;
-            max-width: 800px;
-            margin-top: 2rem;
+            max-width: 1200px;
         }
-
-        .stat {
+        
+        .feature-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #667eea;
+            text-align: left;
+        }
+        
+        .feature-title {
+            font-size: 1.4em;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        
+        .feature-desc {
+            font-size: 1.1em;
+            line-height: 1.5;
+            color: #666;
+        }
+        
+        .mentor-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             text-align: center;
-            animation: bounceIn 1s ease-out;
+            margin: 15px;
+            min-width: 250px;
         }
-
-        .stat-number {
-            font-size: 3rem;
-            font-weight: bold;
-            color: #ffd700;
-            display: block;
+        
+        .mentor-name {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 10px;
         }
-
+        
+        .mentor-title {
+            font-size: 1.1em;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .mentor-education {
+            font-size: 1em;
+            color: #888;
+        }
+        
+        .pricing-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        
+        .pricing-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            min-width: 300px;
+            position: relative;
+        }
+        
+        .pricing-card.featured {
+            border: 3px solid #667eea;
+            transform: scale(1.05);
+        }
+        
+        .price {
+            font-size: 3em;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .price-label {
+            font-size: 1.1em;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .roadmap-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin: 40px 0;
+            max-width: 800px;
+        }
+        
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timeline-number {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2em;
+            flex-shrink: 0;
+        }
+        
+        .timeline-content {
+            text-align: left;
+        }
+        
+        .timeline-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 8px;
+        }
+        
+        .timeline-desc {
+            font-size: 1.1em;
+            color: #666;
+        }
+        
         .navigation {
             position: fixed;
             bottom: 30px;
@@ -141,404 +268,490 @@
             gap: 15px;
             z-index: 1000;
         }
-
+        
         .nav-btn {
-            padding: 12px 24px;
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            border-radius: 25px;
+            background: rgba(102, 126, 234, 0.9);
             color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
             cursor: pointer;
-            font-size: 1rem;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            font-size: 1em;
+            font-weight: 500;
             transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
         }
-
+        
         .nav-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(102, 126, 234, 1);
             transform: translateY(-2px);
         }
-
+        
         .slide-counter {
-            position: fixed;
+            position: absolute;
             top: 30px;
             right: 30px;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(102, 126, 234, 0.9);
+            color: white;
             padding: 10px 20px;
             border-radius: 20px;
-            backdrop-filter: blur(10px);
-            z-index: 1000;
+            font-weight: 500;
         }
-
+        
         .logo {
-            position: absolute;
-            top: 30px;
-            left: 30px;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #ffd700;
+            font-size: 2.5em;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
         }
-
-        .bullet-points {
-            text-align: left;
-            max-width: 800px;
-        }
-
-        .bullet-points li {
-            text-align: left;
-            margin-bottom: 1.5rem;
-            padding-left: 1rem;
-            position: relative;
-        }
-
-        .bullet-points li::before {
-            content: "→";
-            position: absolute;
-            left: -1rem;
-            color: #ffd700;
-            font-weight: bold;
-        }
-
-        .cta-section {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 3rem;
-            border-radius: 20px;
-            margin-top: 2rem;
-            text-align: center;
-            backdrop-filter: blur(10px);
-        }
-
-        .contact-info {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 2rem;
-            flex-wrap: wrap;
-            gap: 2rem;
-        }
-
-        .contact-item {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 1.5rem;
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes bounceIn {
-            0% {
-                opacity: 0;
-                transform: scale(0.3);
-            }
-            50% {
-                opacity: 1;
-                transform: scale(1.05);
-            }
-            70% {
-                transform: scale(0.9);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
+        
         @media (max-width: 768px) {
             .slide {
-                padding: 30px;
+                padding: 40px 20px;
+                margin: 10px;
             }
             
             .slide h1 {
-                font-size: 2.5rem;
+                font-size: 2.5em;
             }
             
             .slide h2 {
-                font-size: 2rem;
+                font-size: 2em;
             }
             
-            .features-grid {
+            .stats-grid, .features-grid {
                 grid-template-columns: 1fr;
             }
             
-            .stats-container {
+            .pricing-container {
                 flex-direction: column;
-                gap: 2rem;
+                align-items: center;
+            }
+            
+            .timeline-item {
+                flex-direction: column;
+                text-align: center;
             }
         }
     </style>
 </head>
 <body>
-    <div class="logo">StepSmart</div>
-    
-    <div class="slide-counter">
-        <span id="current-slide">1</span> / <span id="total-slides">9</span>
-    </div>
-
-    <div class="slide-container" id="slideContainer">
+    <div class="presentation-container">
+        <div class="slide-counter" id="slideCounter">1 / 12</div>
+        
         <!-- Slide 1: Title -->
-        <div class="slide">
-            <h1>StepSmart</h1>
-            <p class="subtitle">Empowering Students to Land Their Dream Jobs</p>
-            <div class="cta-section">
-                <h3>Transforming Career Preparation for College Students</h3>
-                <p>From Resume to Dream Job - We've Got You Covered</p>
-            </div>
+        <div class="slide active">
+            <div class="logo">StepSmart</div>
+            <h1>Bridging Education to Employment</h1>
+            <p class="highlight">Mentorship-driven job readiness for India's graduates</p>
+            <p>Founded by IIT & IIM Alumni</p>
         </div>
-
-        <!-- Slide 2: Problem -->
+        
+        <!-- Slide 2: Problem Statement -->
         <div class="slide">
-            <h2>The Challenge</h2>
-            <div class="bullet-points">
-                <ul>
-                    <li>70% of college students feel unprepared for job interviews</li>
-                    <li>Limited access to quality career guidance and mentorship</li>
-                    <li>Gap between academic learning and industry requirements</li>
-                    <li>Lack of structured preparation pathways</li>
-                    <li>Insufficient peer-to-peer learning opportunities</li>
-                </ul>
+            <h2>The Problem</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">1.5M+</span>
+                    <span class="stat-label">Engineers Graduate Annually</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">50%+</span>
+                    <span class="stat-label">Considered Unemployable</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">40M+</span>
+                    <span class="stat-label">Students in Higher Education</span>
+                </div>
             </div>
+            <p>Students possess skills and domain knowledge but lack <span class="highlight">structured mentorship and career guidance</span></p>
         </div>
-
-        <!-- Slide 3: Solution -->
+        
+        <!-- Slide 3: Our Solution -->
         <div class="slide">
             <h2>Our Solution</h2>
             <div class="features-grid">
                 <div class="feature-card">
-                    <h4>🎯 Structured Pathways</h4>
-                    <p>Personalized preparation roadmaps tailored to individual career goals</p>
+                    <div class="feature-title">🎯 Structured Learning</div>
+                    <div class="feature-desc">Curated pathways designed by industry professionals</div>
                 </div>
                 <div class="feature-card">
-                    <h4>🤝 Peer-to-Peer Learning</h4>
-                    <p>Interactive interview preparation with fellow students</p>
+                    <div class="feature-title">👥 Peer Support</div>
+                    <div class="feature-desc">Community-led preparation that's relatable and less intimidating</div>
                 </div>
                 <div class="feature-card">
-                    <h4>📚 Curated Materials</h4>
-                    <p>High-quality, industry-relevant preparation resources</p>
+                    <div class="feature-title">🤝 1:1 Mentorship</div>
+                    <div class="feature-desc">Direct access to IIT/IIM alumni mentors</div>
                 </div>
                 <div class="feature-card">
-                    <h4>👥 Elite Mentorship</h4>
-                    <p>Direct guidance from IIT and IIM graduates</p>
+                    <div class="feature-title">💼 Practical Focus</div>
+                    <div class="feature-desc">Real problems, practical solutions, and actionable guidance</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-title">🗣️ Communication Skills</div>
+                    <div class="feature-desc">Soft skills development integrated with domain knowledge</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-title">🤖 AI-Ready</div>
+                    <div class="feature-desc">Future-ready preparation for the age of AI</div>
                 </div>
             </div>
         </div>
-
-        <!-- Slide 4: Market Opportunity -->
+        
+        <!-- Slide 4: College Offer Pack -->
         <div class="slide">
-            <h2>Market Opportunity</h2>
-            <div class="stats-container">
-                <div class="stat">
-                    <span class="stat-number">50M+</span>
-                    <p>College Students in India</p>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">$2.8B</span>
-                    <p>EdTech Market Size</p>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">15%</span>
-                    <p>Annual Growth Rate</p>
-                </div>
-            </div>
-            <div class="cta-section">
-                <p>Massive opportunity in career preparation segment with growing demand for skill-based learning</p>
-            </div>
-        </div>
-
-        <!-- Slide 5: Product Offerings -->
-        <div class="slide">
-            <h2>Our Comprehensive Program</h2>
-            <div class="bullet-points">
-                <ul>
-                    <li><strong>Resume Building:</strong> Professional resume creation and optimization</li>
-                    <li><strong>Soft Skills Training:</strong> Communication, leadership, and interpersonal skills</li>
-                    <li><strong>Interview Preparation:</strong> Mock interviews and feedback sessions</li>
-                    <li><strong>Technical Skills:</strong> Product Management, Software Development, Business Analytics</li>
-                    <li><strong>Peer Practice:</strong> Collaborative learning environment</li>
-                    <li><strong>Mentorship:</strong> One-on-one guidance from industry experts</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Slide 6: Go-to-Market Strategy -->
-        <div class="slide">
-            <h2>Launch Strategy</h2>
+            <h2>College Offer Pack</h2>
+            <h3>Our Flagship Program</h3>
             <div class="features-grid">
                 <div class="feature-card">
-                    <h4>🎓 Direct College Partnerships</h4>
-                    <p>Launching in 10 colleges this year with on-campus presence</p>
+                    <div class="feature-title">📝 Resume Preparation Workshop</div>
+                    <div class="feature-desc">High-impact resumes with ATS optimization and live transformations</div>
                 </div>
                 <div class="feature-card">
-                    <h4>📈 Scalable Model</h4>
-                    <p>Proven framework ready for rapid expansion</p>
+                    <div class="feature-title">🗣️ Communication Bootcamp</div>
+                    <div class="feature-desc">HR interviews, public speaking, and group discussions</div>
                 </div>
                 <div class="feature-card">
-                    <h4>🎯 Targeted Approach</h4>
-                    <p>Focus on high-placement colleges and motivated students</p>
+                    <div class="feature-title">🧮 Guesstimates & Reasoning</div>
+                    <div class="feature-desc">Problem-solving frameworks and market sizing techniques</div>
                 </div>
                 <div class="feature-card">
-                    <h4>💡 Innovation-First</h4>
-                    <p>Continuous program improvement based on student outcomes</p>
+                    <div class="feature-title">💡 Technical Questions Simplified</div>
+                    <div class="feature-desc">Breaking down complex problems with structured thinking</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-title">🤖 Excellence in the Age of AI</div>
+                    <div class="feature-desc">AI tools mastery and future-ready mindset development</div>
+                </div>
+            </div>
+            <p><span class="highlight">Format:</span> 2 months, 5 interactive sessions + optional mentorship</p>
+        </div>
+        
+        <!-- Slide 5: Our Mentors -->
+        <div class="slide">
+            <h2>Meet Our Mentors</h2>
+            <div class="features-grid">
+                <div class="mentor-card">
+                    <div class="mentor-name">Ankit</div>
+                    <div class="mentor-title">Product Manager, Microsoft</div>
+                    <div class="mentor-education">IIM Bangalore | MITWPU Alumnus</div>
+                </div>
+                <div class="mentor-card">
+                    <div class="mentor-name">Sanket</div>
+                    <div class="mentor-title">Product Manager, Mastercard</div>
+                    <div class="mentor-education">IIT Kanpur</div>
+                </div>
+                <div class="mentor-card">
+                    <div class="mentor-name">Achyut</div>
+                    <div class="mentor-title">Business Analyst</div>
+                    <div class="mentor-education">IIT Madras | IIM Bangalore</div>
+                </div>
+                <div class="mentor-card">
+                    <div class="mentor-name">Shivang</div>
+                    <div class="mentor-title">Data Engineer</div>
+                    <div class="mentor-education">IIT Kanpur</div>
+                </div>
+            </div>
+            <p>All mentors are <span class="highlight">equity-aligned</span> and committed to student success</p>
+        </div>
+        
+        <!-- Slide 6: Target Market -->
+        <div class="slide">
+            <h2>Target Market</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">👨‍🎓</span>
+                    <span class="stat-label">Final & Pre-final Year Students</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">👩‍💼</span>
+                    <span class="stat-label">Early Career Professionals (0-2 years)</span>
+                </div>
+            </div>
+            <h3>Focus Domains</h3>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-title">💻 Software Engineering</div>
+                    <div class="feature-desc">Technical interview prep and coding best practices</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-title">📊 Business Analytics</div>
+                    <div class="feature-desc">Data interpretation and business insights</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-title">🚀 Product Management</div>
+                    <div class="feature-desc">Product thinking and strategic planning</div>
+                </div>
+            </div>
+            <p><span class="highlight">Future expansion:</span> Consulting, Marketing, Design, Finance</p>
+        </div>
+        
+        <!-- Slide 7: Pricing Strategy -->
+        <div class="slide">
+            <h2>Pricing Strategy</h2>
+            <div class="pricing-container">
+                <div class="pricing-card">
+                    <div class="price">₹5,000</div>
+                    <div class="price-label">Internal Cost</div>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="price">₹6,000-7,500</div>
+                    <div class="price-label">Institutional Rate</div>
+                </div>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-title">🎓 Standard Package</div>
+                    <div class="feature-desc">5 interactive sessions + group mentorship</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-title">⭐ Premium Package</div>
+                    <div class="feature-desc">Includes 1:1 mentorship + bonus content + certification</div>
+                </div>
+            </div>
+            <p><span class="highlight">No direct billing to students initially</span> - colleges charged as partners</p>
+        </div>
+        
+        <!-- Slide 8: MITWPU Launch -->
+        <div class="slide">
+            <h2>MITWPU Launch Strategy</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">500</span>
+                    <span class="stat-label">Pilot Students</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">July</span>
+                    <span class="stat-label">Launch Timeline</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">On-Campus</span>
+                </div>
+            </div>
+            <h3>Why MITWPU?</h3>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-title">🏠 Alumni Connection</div>
+                    <div class="feature-desc">Founding mentor Ankit is a proud MITWPU alumnus</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-title">🎁 Free Inaugural Session</div>
+                    <div class="feature-desc">Risk-free trial to demonstrate value</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-title">📚 Personalized Content</div>
+                    <div class="feature-desc">Tailored materials and follow-up support</div>
                 </div>
             </div>
         </div>
-
-        <!-- Slide 7: Competitive Advantage -->
+        
+        <!-- Slide 9: Financial Projections -->
+        <div class="slide">
+            <h2>Financial Projections</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">₹10L</span>
+                    <span class="stat-label">Year 1 Revenue Target</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">10</span>
+                    <span class="stat-label">College Partnerships</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">₹1L+</span>
+                    <span class="stat-label">Average per College</span>
+                </div>
+            </div>
+            <h3>Revenue Model</h3>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-title">🏫 Institutional Partnerships</div>
+                    <div class="feature-desc">Primary revenue from college tie-ups</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-title">💼 Corporate Partnerships</div>
+                    <div class="feature-desc">Future revenue from hiring-ready talent pipeline</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-title">📱 Platform Subscriptions</div>
+                    <div class="feature-desc">Tech platform launch with self-paced content</div>
+                </div>
+            </div>
+            <p><span class="highlight">Low burn rate</span> due to equity-aligned mentors</p>
+        </div>
+        
+        <!-- Slide 10: Future Roadmap -->
+        <div class="slide">
+            <h2>Future Roadmap</h2>
+            <div class="roadmap-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-number">1</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Tech Platform Launch</div>
+                        <div class="timeline-desc">Self-paced content + mentor scheduling system</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-number">2</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">AI Integration</div>
+                        <div class="timeline-desc">AI assistant for resume review and mock interview analysis</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-number">3</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Corporate Partnerships</div>
+                        <div class="timeline-desc">Direct hiring pipeline for partner companies</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-number">4</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Specialized Tracks</div>
+                        <div class="timeline-desc">Consulting, Finance, Data Science, Marketing verticals</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-number">5</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Certification Program</div>
+                        <div class="timeline-desc">Industry-recognized micro-credentials</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 11: Competitive Advantage -->
         <div class="slide">
             <h2>Why StepSmart Wins</h2>
-            <div class="bullet-points">
-                <ul>
-                    <li><strong>Holistic Approach:</strong> End-to-end career preparation, not just skills training</li>
-                    <li><strong>Elite Network:</strong> Access to IIT/IIM mentors provides credibility and results</li>
-                    <li><strong>Peer Learning:</strong> Unique collaborative preparation model</li>
-                    <li><strong>Proven Results:</strong> Structured pathways with measurable outcomes</li>
-                    <li><strong>Scalable Technology:</strong> Platform-enabled delivery for rapid growth</li>
-                </ul>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-title">🎯 Direct Access to Elite Mentors</div>
+                    <div class="feature-desc">IIT/IIM alumni actively involved in guidance</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-title">👥 Community-Led Approach</div>
+                    <div class="feature-desc">Peer learning that's relatable and less intimidating</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-title">🔧 Practical Solutions Focus</div>
+                    <div class="feature-desc">Real problems from actual interviews and experiences</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-title">📚 Custom Curated Content</div>
+                    <div class="feature-desc">Materials created by mentors based on personal experience</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-title">🌐 Holistic Integration</div>
+                    <div class="feature-desc">Soft skills + domain knowledge in one comprehensive pack</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-title">💰 Affordable Structure</div>
+                    <div class="feature-desc">Institutional partnerships make it accessible to all students</div>
+                </div>
             </div>
         </div>
-
-        <!-- Slide 8: Financial Projections -->
+        
+        <!-- Slide 12: Call to Action -->
         <div class="slide">
-            <h2>Growth Projections</h2>
-            <div class="stats-container">
-                <div class="stat">
-                    <span class="stat-number">1,000</span>
-                    <p>Students Year 1</p>
+            <div class="logo">StepSmart</div>
+            <h1>Ready to Bridge the Gap?</h1>
+            <p>Join us in transforming how India's graduates transition from education to employment</p>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">📧</span>
+                    <span class="stat-label">ankit@stepsmart.net</span>
                 </div>
-                <div class="stat">
-                    <span class="stat-number">5,000</span>
-                    <p>Students Year 2</p>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">25,000</span>
-                    <p>Students Year 3</p>
+                <div class="stat-card">
+                    <span class="stat-number">🌐</span>
+                    <span class="stat-label">www.stepsmart.net</span>
                 </div>
             </div>
-            <div class="cta-section">
-                <h3>Revenue Model</h3>
-                <p>Subscription-based pricing with tiered service levels</p>
-                <p>Corporate partnerships for placement-focused programs</p>
-            </div>
-        </div>
-
-        <!-- Slide 9: Call to Action -->
-        <div class="slide">
-            <h2>Let's Transform Careers Together</h2>
-            <div class="cta-section">
-                <h3>Ready to Partner With Us?</h3>
-                <p>Join us in revolutionizing how students prepare for their careers</p>
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <h4>Investment Opportunity</h4>
-                        <p>Seeking strategic partners to scale nationwide</p>
-                    </div>
-                    <div class="contact-item">
-                        <h4>College Partnerships</h4>
-                        <p>Pilot programs available for forward-thinking institutions</p>
-                    </div>
-                    <div class="contact-item">
-                        <h4>Corporate Collaboration</h4>
-                        <p>Custom programs for your recruitment needs</p>
-                    </div>
-                </div>
-            </div>
+            <h3 class="highlight">Let's give every skilled student their deserved step forward</h3>
         </div>
     </div>
-
+    
     <div class="navigation">
-        <button class="nav-btn" onclick="previousSlide()">← Previous</button>
+        <button class="nav-btn" onclick="prevSlide()">← Previous</button>
         <button class="nav-btn" onclick="nextSlide()">Next →</button>
     </div>
-
+    
     <script>
         let currentSlide = 0;
-        const totalSlides = document.querySelectorAll('.slide').length;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
         
-        document.getElementById('total-slides').textContent = totalSlides;
-
-        function updateSlidePosition() {
-            const container = document.getElementById('slideContainer');
-            container.style.transform = `translateX(-${currentSlide * 100}vw)`;
-            document.getElementById('current-slide').textContent = currentSlide + 1;
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            updateCounter();
         }
-
+        
         function nextSlide() {
-            if (currentSlide < totalSlides - 1) {
-                currentSlide++;
-                updateSlidePosition();
-            }
+            showSlide(currentSlide + 1);
         }
-
-        function previousSlide() {
-            if (currentSlide > 0) {
-                currentSlide--;
-                updateSlidePosition();
-            }
+        
+        function prevSlide() {
+            showSlide(currentSlide - 1);
         }
-
+        
+        function updateCounter() {
+            document.getElementById('slideCounter').textContent = `${currentSlide + 1} / ${totalSlides}`;
+        }
+        
         // Keyboard navigation
         document.addEventListener('keydown', function(e) {
             if (e.key === 'ArrowRight' || e.key === ' ') {
                 nextSlide();
             } else if (e.key === 'ArrowLeft') {
-                previousSlide();
+                prevSlide();
             }
         });
-
-        // Touch/swipe navigation for mobile
-        let startX = 0;
-        let endX = 0;
-
+        
+        // Touch/swipe support
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
         document.addEventListener('touchstart', function(e) {
-            startX = e.touches[0].clientX;
+            touchStartX = e.changedTouches[0].screenX;
         });
-
+        
         document.addEventListener('touchend', function(e) {
-            endX = e.changedTouches[0].clientX;
-            if (startX - endX > 50) {
-                nextSlide();
-            } else if (endX - startX > 50) {
-                previousSlide();
-            }
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
         });
-
-        // Auto-animate elements when they come into view
-        function animateOnScroll() {
-            const slides = document.querySelectorAll('.slide');
-            slides.forEach((slide, index) => {
-                if (index === currentSlide) {
-                    slide.style.opacity = '1';
-                    const elements = slide.querySelectorAll('h1, h2, h3, p, .feature-card, .stat');
-                    elements.forEach((el, i) => {
-                        el.style.animationDelay = `${i * 0.1}s`;
-                    });
-                }
-            });
+        
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                nextSlide();
+            }
+            if (touchEndX > touchStartX + 50) {
+                prevSlide();
+            }
         }
-
+        
+        // Auto-play functionality (optional)
+        let autoPlay = false;
+        let autoPlayInterval;
+        
+        function startAutoPlay() {
+            autoPlay = true;
+            autoPlayInterval = setInterval(nextSlide, 10000); // 10 seconds per slide
+        }
+        
+        function stopAutoPlay() {
+            autoPlay = false;
+            clearInterval(autoPlayInterval);
+        }
+        
         // Initialize
-        updateSlidePosition();
-        animateOnScroll();
+        updateCounter();
     </script>
 </body>
 </html>
